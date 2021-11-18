@@ -163,14 +163,26 @@ var movieNight = function(movies, timeLimit) {
 // given an array of strings, use _.map to return a new array containing all
 // strings converted to uppercase letters.
 var upperCaseFruits = function(fruits) {
-
+  var firstCapital = _.map(fruits, function(fruit) {
+    return fruit[0].toUpperCase();
+  });
+  return firstCapital;
 };
 
 // given an array of dessert objects, return a new array of objects
 // that have a new "glutenFree" property, with a boolean value.
 // TIP: Items that contain flour are not gluten-free.
 var glutenFree = function(desserts) {
-
+  var noFlour = _.map(desserts, function (dessert) {
+    var ingredients = dessert.ingredients;
+    if (ingredients.includes('flour')) {
+      dessert.glutenFree = false;
+    } else {
+      dessert.glutenFree = true;
+    }
+    return dessert;
+  });
+  return noFlour;
 };
 
 // use _.map to return an array of items with their sale prices, with a new property
@@ -194,5 +206,11 @@ var glutenFree = function(desserts) {
 
 */
 var applyCoupon = function(groceries, coupon) {
-
+  var salePrices = _.map(groceries, function(item) {
+    var itemPrice = parseInt(parseFloat(item.price.substring(1)) * 100);
+    var salePrice = (Math.round(itemPrice * 0.80)) / 100;
+    item.salePrice = '$' + salePrice;
+    return item;
+  });
+  return salePrices;
 };
